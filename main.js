@@ -9,10 +9,18 @@ const app = createApp({
             cart.value.push(id)
         }
 
+        function removeFromCart(id) {
+    const index = cart.value.indexOf(id)
+    if (index !== -1) {
+        cart.value.splice(index, 1)
+    }
+}
+
         return {
             cart,
             premium,
-            updateCart
+            updateCart,
+            removeFromCart
         }
     }
 })
