@@ -22,7 +22,10 @@ const productDisplay = {
             <button class="button" :disabled="!inStock" @click="addToCart"
             :class="{disabledButton: !inStock}">Add To Cart</button>
             <button class="button" @click="removeFromCart">Remove From Cart</button>
+            
 </div>
+        <review-list v-if="reviews.length" :reviews="reviews"></review-list>
+        <review-form @review-submitted="addReview"></review-form>
 </div>
 `,
 props: {
@@ -80,6 +83,13 @@ setup(props, {emit}) {
     function updateImage(variantImage) {
         image.value = variantImage
     }
+
+    const reviews = ref([])
+
+    function addReview(review) {
+    reviews.value.push(review)
+    }
+
     return {
         product,
         brand,
@@ -95,7 +105,9 @@ setup(props, {emit}) {
         removeFromCart,
         updateImage,
         updateVariant,
-        shipping
+        shipping,
+        addReview,
+        reviews
     }
 }
 }
